@@ -10,17 +10,20 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const fromLocalStorage = localStorage.getItem("token") === "true" || false;
+  const [isAuthenticated, setIsAuthenticated] = useState(fromLocalStorage);
   const navigate = useNavigate();
 
   const login = () => {
     console.log("loggin in");
+    localStorage.setItem("token", "true");
     setIsAuthenticated(true);
     navigate("/home");
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.setItem("token", "false");
     navigate("/login");
   };
 
