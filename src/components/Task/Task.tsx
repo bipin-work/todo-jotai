@@ -14,12 +14,21 @@ interface TaskProps {
   id: string;
   heading: string;
   description: string;
+  completed: boolean;
   onChecked?: () => void;
 }
-const Task: React.FC<TaskProps> = ({ heading, description, onChecked }) => {
+const Task: React.FC<TaskProps> = ({
+  heading,
+  description,
+  onChecked,
+  completed,
+}) => {
   return (
     <Flex className="relative p-2 shadow my-3" gap="4">
-      <Checkbox onChange={(ev) => onChecked && onChecked()} />
+      <Checkbox
+        isChecked={completed}
+        onChange={(ev) => onChecked && onChecked()}
+      />
       <Box>
         <Heading as="h6">Some heading</Heading>
         <Text fontSize="md">Some text</Text>
