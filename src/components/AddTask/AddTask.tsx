@@ -17,6 +17,8 @@ import {
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { EditIcon } from "@chakra-ui/icons";
+import { useAtom } from "jotai";
+import { addTaskAtom, newTaskAtom } from "../../store-jotai/store";
 
 interface AddTaskProps {
   initialValue?: typeof TaskForm & { id: string };
@@ -36,6 +38,8 @@ const AddTask: React.FC<AddTaskProps> = ({
   initialValue = TaskForm,
   isEditMode = false,
 }) => {
+  const [newTask, setNewTask] = useAtom(newTaskAtom);
+  const [_, addTask] = useAtom(addTaskAtom);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstFieldRef = useRef(null);
   const saveBtnRef = useRef<HTMLButtonElement>(null);
@@ -63,6 +67,8 @@ const AddTask: React.FC<AddTaskProps> = ({
               validationSchema={TaskFormSchema}
               onSubmit={(values, { setSubmitting }) => {
                 console.log("values", values);
+                setNewTask({ ...values, id: "", completed: false });
+                addTask();
                 setSubmitting(false);
                 onClose();
               }}

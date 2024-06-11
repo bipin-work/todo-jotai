@@ -19,6 +19,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Home from "./pages/home/Home";
 import SharedGroup from "./pages/SharedGroup/SharedGroup";
 import Profile from "./pages/profile/Profile";
+import { Provider as JotaiProvider } from "jotai";
 
 const App = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -46,8 +47,10 @@ createRoot(document.getElementById("app")).render(
   <>
     <Router>
       <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <App />
+        <JotaiProvider>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <App />
+        </JotaiProvider>
       </ChakraProvider>
     </Router>
   </>

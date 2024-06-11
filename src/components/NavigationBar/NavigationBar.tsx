@@ -9,7 +9,7 @@ const NavigationBar = () => {
   };
   return (
     <Box
-      className="absolute w-full h-12 bottom-0 left-0 shadow-2xl"
+      className="absolute w-full bottom-0 left-0 shadow-2xl"
       sx={{
         boxShadow: "0 0 15px -10px",
       }}
