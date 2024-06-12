@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --open --mode development --live-reload --hot",
-    "start:dev": "webpack --mode development && cd dist && cross-env PORT=3001 npx servor",
-    "start:prod": "webpack --mode production && cd dist && PORT=3001 npx servor",
+    "start:dev": "webpack --mode development && cd public && cross-env PORT=3001 npx servor",
+    "start:prod": "webpack --mode production && cd public && PORT=3001 npx servor",
     "build": "webpack --mode production"
   },
   "description": "A todo app created with jotai state management",
