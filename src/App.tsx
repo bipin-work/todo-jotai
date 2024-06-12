@@ -17,7 +17,7 @@ import { AuthProvider } from "./authentication/AuthContext";
 import Login from "./pages/login/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Home from "./pages/home/Home";
-import SharedGroup from "./pages/SharedGroup/SharedGroup";
+import SharedGroup from "./pages/sharedGroup/SharedGroup";
 import Profile from "./pages/profile/Profile";
 import { Provider as JotaiProvider } from "jotai";
 
