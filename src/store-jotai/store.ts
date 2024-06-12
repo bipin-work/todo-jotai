@@ -45,14 +45,36 @@ export const addTask = (
   },
 ];
 
+const createPersistentAtom = <AtomType>(
+  key: string,
+  initialValue: AtomType
+) => {
+  const getInitialValue = () => {
+    const item = localStorage.getItem(key);
+    if (item !== null) {
+      return JSON.parse(item) as AtomType;
+    }
+    return initialValue;
+  };
+  const baseAtom = atom(getInitialValue());
+  const derivedAtom = atom(
+    (get) => get(baseAtom),
+    (get, set, update) => {
+      const nextValue =
+        typeof update === "function" ? update(get(baseAtom)) : update;
+      set(baseAtom, nextValue);
+      localStorage.setItem(key, JSON.stringify(nextValue));
+    }
+  );
+  return derivedAtom;
+};
+
 export const newTaskAtom = atom<Task>({ ...newTask });
-export const tasksAtom = atom<Task[]>([]);
+export const tasksAtom = createPersistentAtom<Task[]>("tasks", []);
 export const addTaskAtom = atom(
   () => "",
   (get, set) => {
-    console.log("setting tasks atom", tasksAtom);
     set(tasksAtom, addTask(get(tasksAtom), get(newTaskAtom)));
-    console.log("setting tasks atom", tasksAtom);
     set(newTaskAtom, { ...newTask });
   }
 );
