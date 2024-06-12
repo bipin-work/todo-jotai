@@ -9,7 +9,7 @@ const PageContainer: React.FC<React.PropsWithChildren<PageContainerProps>> = ({
   children,
 }) => {
   return (
-    <Box className={`relative pt-12 px-2.5 h-full w-full ${classes}`}>
+    <Box className={`relative pt-16 px-2.5 h-full w-full ${classes}`}>
       {children}
     </Box>
   );
