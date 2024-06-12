@@ -1,9 +1,12 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   entry: "./src/index.ts",
   output: {
+    path: path.resolve(__dirname, "public"),
     publicPath: "http://localhost:3000/",
+    filename: "bundle.js",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],

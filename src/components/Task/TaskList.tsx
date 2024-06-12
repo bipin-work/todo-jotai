@@ -32,7 +32,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
       </Box>
       {completedShow && (
         <Box>
-          <Heading as="h5">Completed Tasks:</Heading>
+          <Heading as="h5" size="md">
+            Completed Tasks:
+          </Heading>
           {tasks
             .filter((task) => task.completed)
             .map((task) => (

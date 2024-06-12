@@ -4,7 +4,8 @@
   "scripts": {
     "start": "webpack serve --open --mode development --live-reload --hot",
     "start:dev": "webpack --mode development && cd dist && cross-env PORT=3001 npx servor",
-    "start:prod": "webpack --mode production && cd dist && PORT=3001 npx servor"
+    "start:prod": "webpack --mode production && cd dist && PORT=3001 npx servor",
+    "build": "webpack --mode production"
   },
   "description": "A todo app created with jotai state management",
   "author": "Bipin Shrestha",
@@ -21,6 +22,7 @@
     "@chakra-ui/theme-tools": "^2.1.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@phosphor-icons/react": "^2.1.5",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.19",
     "babel-loader": "^9.1.3",

@@ -25,11 +25,6 @@ const App = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    // <div className="container">
-    //   <Button onClick={toggleColorMode}>
-    //     Toggle {colorMode === "light" ? "Dark" : "Light"}
-    //   </Button>
-    // </div>
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
