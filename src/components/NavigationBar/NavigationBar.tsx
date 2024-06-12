@@ -1,8 +1,17 @@
 import React from "react";
-import { Box, Flex, VStack, Icon, As, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  VStack,
+  Icon,
+  As,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import Home from "../../pages/home/Home";
 import { User, Users, CheckSquare } from "@phosphor-icons/react";
+import { bgTheme } from "../../styles/theming/theme";
 interface NavigationItem {
   id: number;
   title: string;
@@ -19,7 +28,7 @@ const NavigationItemsData: NavigationItem[] = [
   {
     id: 2,
     title: "Group",
-    path: "/group",
+    path: "/shared-group",
     icon: Users,
   },
   {
@@ -37,16 +46,16 @@ const NavigationItemsData: NavigationItem[] = [
 ];
 
 const NavigationBar = () => {
+  const bg = useColorModeValue(bgTheme.light, bgTheme.dark);
   const navigate = useNavigate();
   const onNavigate = (path: string) => {
     navigate(path);
   };
   return (
     <Box
+      bg={bg}
+      boxShadow="base"
       className="absolute w-full bottom-0 left-0 shadow-2xl"
-      sx={{
-        boxShadow: "0 0 15px -10px",
-      }}
     >
       <Flex
         className="h-full w-full"

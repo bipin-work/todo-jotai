@@ -24,5 +24,6 @@ const fonts = {
 };
 
 const theme = extendTheme({ config, breakpoints, fonts, colors });
+export const bgTheme = { light: "gray.100", dark: "gray.700" };
 
 export default theme;

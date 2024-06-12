@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading, useColorModeValue } from "@chakra-ui/react";
+import { bgTheme } from "../../styles/theming/theme";
 
 interface HeaderProps {
   headerName: string;
@@ -11,9 +12,13 @@ const Header: React.FC<HeaderProps> = ({
   firstComponent,
   secondComponent,
 }) => {
-  const bg = useColorModeValue("white", "gray.700");
+  const bg = useColorModeValue(bgTheme.light, bgTheme.dark);
   return (
-    <Box bg={bg} boxShadow="base" className="absolute h-12 w-full top-0 left-0">
+    <Box
+      bg={bg}
+      boxShadow={"base"}
+      className="absolute h-12 w-full top-0 left-0"
+    >
       <Flex className="w-full h-full" justify="center" align="center">
         <Box className="w-1/4 text-center">{firstComponent}</Box>
         <Heading className="w-1/2 text-center" as="h5" size="md">
