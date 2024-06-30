@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Heading, Flex } from "@chakra-ui/react";
-import AddTask from "../../components/AddTask/AddTask";
+import { Heading, Flex } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { tasksAtom } from "../../store-jotai/store";
 import TaskList from "../../components/Task/TaskList";
@@ -16,7 +15,6 @@ const Home = () => {
         {tasks.length > 0 ? (
           <>
             <TaskList tasks={tasks} />
-            <AddTask />
           </>
         ) : (
           <Flex
@@ -28,7 +26,6 @@ const Home = () => {
             <Heading className="mb-2" as="h5" size="md">
               There are no tasks. Please create a task!
             </Heading>
-            <AddTask />
           </Flex>
         )}
       </PageContainer>

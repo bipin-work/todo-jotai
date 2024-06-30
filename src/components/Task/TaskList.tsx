@@ -1,5 +1,6 @@
 import React from "react";
-import { Task, showCompeletedAtom } from "../../store-jotai/store";
+import { showCompeletedAtom } from "../../store-jotai/store";
+import { Task } from "./TaskItem";
 import TaskItem from "./TaskItem";
 import { Box, Heading, Flex } from "@chakra-ui/react";
 import { useAtom } from "jotai";

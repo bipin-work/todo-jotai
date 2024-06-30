@@ -1,12 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { atom } from "jotai";
-
-export interface Task {
-  id: string;
-  heading: string;
-  description: string;
-  completed: boolean;
-}
+import { Task } from "../components/Task/TaskItem";
 
 const newTask = {
   id: "",
@@ -68,6 +62,8 @@ const createPersistentAtom = <AtomType>(
   );
   return derivedAtom;
 };
+
+export const taskDrawerAtom = atom(false);
 
 export const newTaskAtom = atom<Task>({ ...newTask });
 export const tasksAtom = createPersistentAtom<Task[]>("tasks", []);

@@ -1,20 +1,24 @@
 import React from "react";
 import {
-  Flex,
   Card,
   Checkbox,
   Box,
   Heading,
   Text,
-  Container,
   CardBody,
   CardFooter,
 } from "@chakra-ui/react";
-import { EditIcon } from "@chakra-ui/icons";
-import AddTask from "../AddTask/AddTask";
-import { Task, removeTaskAtom, toggleTaskAtom } from "../../store-jotai/store";
+import { removeTaskAtom, toggleTaskAtom } from "../../store-jotai/store";
 import { useAtom } from "jotai";
 import { DeleteIcon } from "@chakra-ui/icons";
+import EditTask from "./EditTask/EditTask";
+
+export interface Task {
+  id: string;
+  heading: string;
+  description: string;
+  completed: boolean;
+}
 
 interface TaskProps {
   task: Task;
@@ -38,7 +42,7 @@ const TaskItem: React.FC<TaskProps> = ({ task }) => {
       </CardBody>
       <CardFooter>
         <Box>
-          <AddTask initialValue={task} isEditMode />
+          <EditTask initialValue={task} />
           <DeleteIcon onClick={() => removeTask(task.id)} />
         </Box>
       </CardFooter>
