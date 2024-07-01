@@ -18,6 +18,7 @@ import * as Yup from "yup";
 import { newTaskAtom, addTaskAtom } from "../../store-jotai/store";
 import { useAtom } from "jotai";
 import { Task } from "./TaskItem";
+import { useCreateTask, useUpdateTask } from "../../api/tasks/useTask";
 
 interface TaskFormProps {
   initialValue?: Task;
@@ -26,8 +27,10 @@ interface TaskFormProps {
 }
 
 const TaskFormValue = {
+  id: "",
   heading: "",
   description: "",
+  completed: false,
 };
 
 const TaskFormSchema = Yup.object().shape({
@@ -41,6 +44,8 @@ const TaskForm: React.FC<TaskFormProps> = ({
 }) => {
   const [newTask, setNewTask] = useAtom(newTaskAtom);
   const [_, addTask] = useAtom(addTaskAtom);
+  const createTaskMutation = useCreateTask();
+  const updateTaskMutation = useUpdateTask();
 
   return (
     <Formik
@@ -48,7 +53,12 @@ const TaskForm: React.FC<TaskFormProps> = ({
       validationSchema={TaskFormSchema}
       onSubmit={(values, { setSubmitting }) => {
         console.log("values", values);
-        setNewTask({ ...values, id: "", completed: false });
+        if (values.id) {
+          updateTaskMutation.mutate({ ...values });
+        } else {
+          createTaskMutation.mutate({ ...values });
+        }
+        setNewTask({ ...values, completed: false });
         addTask();
         setSubmitting(false);
         onFinish && onFinish();

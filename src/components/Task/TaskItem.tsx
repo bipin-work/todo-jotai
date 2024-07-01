@@ -14,7 +14,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import EditTask from "./EditTask/EditTask";
 
 export interface Task {
-  id: string;
+  id?: string;
   heading: string;
   description: string;
   completed: boolean;
@@ -30,7 +30,7 @@ const TaskItem: React.FC<TaskProps> = ({ task }) => {
     <Card direction="row" className="relative my-3 pl-4" gap="4">
       <Checkbox
         isChecked={task.completed}
-        onChange={(_) => toggleTask(task.id)}
+        onChange={(_) => toggleTask(task.id!)}
       />
       <CardBody>
         <Box>
@@ -43,7 +43,7 @@ const TaskItem: React.FC<TaskProps> = ({ task }) => {
       <CardFooter>
         <Box>
           <EditTask initialValue={task} />
-          <DeleteIcon onClick={() => removeTask(task.id)} />
+          <DeleteIcon onClick={() => removeTask(task.id!)} />
         </Box>
       </CardFooter>
     </Card>

@@ -11,6 +11,7 @@ interface TaskListProps {
 }
 const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
   const [completedShow, setCompletedShow] = useAtom(showCompeletedAtom);
+
   const toggleCompletedShow = () => {
     setCompletedShow((cs) => !cs);
   };

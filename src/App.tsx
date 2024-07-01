@@ -11,14 +11,25 @@ import { AuthProvider } from "./authentication/AuthContext";
 
 import { Provider as JotaiProvider } from "jotai";
 import RoutesList from "./routes/RoutesList";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const App = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 2,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
-    <AuthProvider>
-      <RoutesList />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RoutesList />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
 createRoot(document.getElementById("app")).render(
