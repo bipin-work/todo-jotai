@@ -34,7 +34,9 @@ export const useTaskById = (id: string) => {
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
   return useMutation(createTask, {
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log("res", res);
+
       queryClient.invalidateQueries("tasks");
     },
   });

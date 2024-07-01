@@ -9,7 +9,7 @@ import { useTasks } from "../../api/tasks/useTask";
 
 const Home = () => {
   const [tasks, _] = useAtom(tasksAtom);
-  const { data: apiTasks, isLoading, error } = useTasks();
+  const { tasks: apiTasks, isLoading, error } = useTasks();
 
   if (isLoading) return <h2>Loading</h2>;
   if (error) return <p>error</p>;

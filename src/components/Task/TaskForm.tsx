@@ -53,7 +53,8 @@ const TaskForm: React.FC<TaskFormProps> = ({
         if (values.id) {
           updateTaskMutation.mutate({ ...values });
         } else {
-          createTaskMutation.mutate({ ...values });
+          const { id, ...newTask } = values;
+          createTaskMutation.mutate({ ...newTask });
         }
         setSubmitting(false);
         onFinish && onFinish();
