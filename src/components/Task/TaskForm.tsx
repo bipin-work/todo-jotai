@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { newTaskAtom, addTaskAtom } from "../../store-jotai/store";
 import { useAtom } from "jotai";
 import { Task } from "./TaskItem";
 import { useCreateTask, useUpdateTask } from "../../api/tasks/useTask";
@@ -42,8 +41,6 @@ const TaskForm: React.FC<TaskFormProps> = ({
   initialValue = TaskFormValue,
   onFinish,
 }) => {
-  const [newTask, setNewTask] = useAtom(newTaskAtom);
-  const [_, addTask] = useAtom(addTaskAtom);
   const createTaskMutation = useCreateTask();
   const updateTaskMutation = useUpdateTask();
 
@@ -58,8 +55,6 @@ const TaskForm: React.FC<TaskFormProps> = ({
         } else {
           createTaskMutation.mutate({ ...values });
         }
-        setNewTask({ ...values, completed: false });
-        addTask();
         setSubmitting(false);
         onFinish && onFinish();
       }}

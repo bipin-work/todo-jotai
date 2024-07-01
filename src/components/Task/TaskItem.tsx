@@ -8,10 +8,10 @@ import {
   CardBody,
   CardFooter,
 } from "@chakra-ui/react";
-import { removeTaskAtom, toggleTaskAtom } from "../../store-jotai/store";
 import { useAtom } from "jotai";
 import { DeleteIcon } from "@chakra-ui/icons";
 import EditTask from "./EditTask/EditTask";
+import { useDeleteTask, useUpdateTask } from "../../api/tasks/useTask";
 
 export interface Task {
   id?: string;
@@ -24,13 +24,21 @@ interface TaskProps {
   task: Task;
 }
 const TaskItem: React.FC<TaskProps> = ({ task }) => {
-  const [_, removeTask] = useAtom(removeTaskAtom);
-  const [__, toggleTask] = useAtom(toggleTaskAtom);
+  const updateTaskMutation = useUpdateTask();
+  const removeTaskById = useDeleteTask();
+
+  const toggleUpdateTask = (task: Task) => {
+    updateTaskMutation.mutate({ ...task, completed: !task.completed });
+  };
+
+  const deleteTask = (id: string) => {
+    removeTaskById.mutate(id);
+  };
   return (
     <Card direction="row" className="relative my-3 pl-4" gap="4">
       <Checkbox
         isChecked={task.completed}
-        onChange={(_) => toggleTask(task.id!)}
+        onChange={(_) => toggleUpdateTask(task)}
       />
       <CardBody>
         <Box>
@@ -43,7 +51,7 @@ const TaskItem: React.FC<TaskProps> = ({ task }) => {
       <CardFooter>
         <Box>
           <EditTask initialValue={task} />
-          <DeleteIcon onClick={() => removeTask(task.id!)} />
+          <DeleteIcon onClick={() => deleteTask(task.id!)} />
         </Box>
       </CardFooter>
     </Card>
