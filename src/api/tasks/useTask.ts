@@ -6,9 +6,8 @@ import {
   fetchTasks,
   updateTask,
 } from "./task";
-import { Task } from "../../components/Task/TaskItem";
 import { useAtom } from "jotai";
-import { taskNetworkStatusAtom, tasksAtom } from "../../store-jotai/store";
+import { tasksAtom } from "../../store-jotai/store";
 import { useEffect } from "react";
 
 export const useTasks = () => {
@@ -34,9 +33,7 @@ export const useTaskById = (id: string) => {
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
   return useMutation(createTask, {
-    onSuccess: (res) => {
-      console.log("res", res);
-
+    onSuccess: () => {
       queryClient.invalidateQueries("tasks");
     },
   });
