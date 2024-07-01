@@ -16,12 +16,12 @@ export const updateTask = async (task: Task) => {
   return res.data;
 };
 
-export const fetchTaskById = async (id: number) => {
+export const fetchTaskById = async (id: string) => {
   const res = await api.get(`/task/${id}`);
   return res.data;
 };
 
-export const deleteTask = async (id: number) => {
+export const deleteTask = async (id: string) => {
   const res = await api.delete(`/task/${id}`);
   return res.data;
 };

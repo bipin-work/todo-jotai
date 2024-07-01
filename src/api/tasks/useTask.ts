@@ -7,12 +7,24 @@ import {
   updateTask,
 } from "./task";
 import { Task } from "../../components/Task/TaskItem";
+import { useAtom } from "jotai";
+import { taskNetworkStatusAtom, tasksAtom } from "../../store-jotai/store";
+import { useEffect } from "react";
 
 export const useTasks = () => {
-  return useQuery("tasks", fetchTasks);
+  const [tasks, setTasks] = useAtom(tasksAtom);
+  const { data, isLoading, error } = useQuery("tasks", fetchTasks);
+
+  useEffect(() => {
+    if (data && !isLoading && !error) {
+      setTasks(data);
+    }
+  }, [data, isLoading, error]);
+
+  return { tasks, isLoading, error };
 };
 
-export const useTaskById = (id: number) => {
+export const useTaskById = (id: string) => {
   return useQuery({
     queryKey: ["tasks", id],
     queryFn: () => fetchTaskById(id),
